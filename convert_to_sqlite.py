@@ -101,7 +101,10 @@ class DB:
         self.entries.append(entry)
 
     def add_dataframe(self, df: pd.DataFrame):
-
+        """
+        Add Dataframe to the DB
+        :param df: DataFrame
+        """
         for i, row in df.iterrows():
 
             tech = Technology(name=row["Technology"], ID=row["ID"], category=row["Category"])
@@ -153,6 +156,12 @@ class DB:
             raise Exception("File not exist")
 
     def save_sqlite(self, file_name: str):
+        """
+        Save the database in SQLIte relational format
+        :param file_name: something that ends up in .sqlite
+        """
+        if not file_name.endswith(".sqlite"):
+            file_name += '.sqlite'
 
         country_df = pd.DataFrame.from_dict(self.countries, orient='index')
         vars_df = pd.DataFrame.from_dict(self.variables, orient='index')
